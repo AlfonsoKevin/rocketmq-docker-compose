@@ -1,0 +1,38 @@
+version: '3.5'
+services:
+  rmqbroker:
+    image: apache/rocketmq:5.1.4
+    container_name: rmqbroker
+    command: sh mqbroker -c /etc/rocketmq/broker.conf --enable-namesrv
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - ./logs:/opt/logs
+      - ./store:/opt/store
+      - ./conf/broker.conf:/etc/rocketmq/broker.conf
+    environment:
+      JAVA_OPT_EXT: "-server -Xms512m -Xmx512m -Xmn200m"
+    networks:
+      rmq:
+        aliases:
+          - rmqbroker
+
+  rmqconsole:
+    image: apacherocketmq/rocketmq-dashboard:latest
+    container_name: rmqconsole
+    ports:
+      - 8086:8080
+    environment:
+      - JAVA_OPTS=-Drocketmq.namesrv.addr=rmqbroker:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+    depends_on:
+      - rmqbroker
+    networks:
+      rmq:
+        aliases:
+          - rmqconsole
+
+networks:
+  rmq:
+    name: rmq
+    driver: bridge
