@@ -6,7 +6,8 @@
 <h1 align="center">rocketmq-docker-compose</h1>
 <p align="center"><strong>rocketmq-docker-compose 单机部署<br><em>持续更新中～</em></strong></p>
 <div align="center">
-    <a href="https://github.com/AlfonsoKevin/redis-tools"><img src="https://img.shields.io/badge/github-项目地址-yellow.svg?style=plasticr"></a></div>
+    <a href="https://github.com/AlfonsoKevin/rocketmq-docker-compose"><img src="https://img.shields.io/badge/github-项目地址-yellow.svg?style=plasticr"></a></div>
+
 
 
 
